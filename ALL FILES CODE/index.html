@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dustin Licos — Data & Power BI Portfolio</title>
+<meta name="description" content="Data analytics portfolio — Power BI dashboards, tech stack, and case studies.">
+
+<!--
+============================================================================
+  HOW THIS SITE IS STRUCTURED  (3 files — read this before you edit)
+============================================================================
+  index.html   → this file. Structure and content only (what you see).
+  styles.css   → all visual design: colors, fonts, layout, hover effects,
+                 animations. The :root block at the very top of styles.css
+                 holds every color/font as a variable — change one line
+                 there and it updates everywhere that variable is used.
+  script.js    → the two small behaviors on this page: the footer year,
+                 the hero bar-chart "grow on load" animation, and smooth
+                 in-page scrolling for the nav links.
+  All three files must sit in the same folder and stay linked via the
+  <link rel="stylesheet"> tag in <head> and the <script src="script.js">
+  tag near the end of <body> — don't rename one without updating the other.
+
+  WHAT TO EDIT, TOP TO BOTTOM:
+  0. ADD YOUR PHOTO → save a square headshot as "profile.jpg" in this same
+                       folder (next to index.html). It's used in two spots:
+                       the larger hero photo (search for class="hero-photo").
+                       Until you add the file, the spot automatically shows
+                       your initials instead — nothing looks broken.
+                       If the crop looks off (e.g. head cut off, too much
+                       empty space), open styles.css and adjust the two
+                       variables near the top: --photo-pos (recenters the
+                       crop) and --photo-zoom (zooms in/out).
+  0b. ADD A BACKGROUND → save a JPG named "background.jpg" in this same
+                         folder. It is automatically displayed behind the
+                         page with a dark, low-opacity treatment.
+  1. Find & replace "Jordan Blake" with your name (appears ~4 times).
+  2. Edit the text inside !-- EDIT: ... -- comments throughout this file.
+  3. TECH STACK  → search for id="tech-stack" and edit the .chip items.
+  4. PROJECTS    → search for id="portfolio" and duplicate a .project-card
+                   block for each dashboard you want to show.
+  5. ADD POWER BI SCREENSHOTS:
+       Export each Power BI report as a PNG or JPG screenshot and save them
+       in the dashboard image folders using the pattern dashboard-01-01.png through
+       dashboard-04-04.png. Each project card cycles through up to four
+       screenshots with its arrow controls.
+
+         <div class="viz-frame">
+           <img class="viz-image" src="dashboard-01.png"
+                alt="Sales Dashboard Power BI report">
+         </div>
+
+  6. CONTACT LINKS → search for id="contact" and update email / LinkedIn / GitHub.
+  7. Fonts: Inter (body), Space Grotesk (headlines), JetBrains Mono (data
+     labels/numbers) — loaded via the Google Fonts @import at the top of
+     styles.css.
+  8. To publish: create a GitHub repo named "username.github.io", upload
+     all three files (index.html, styles.css, script.js) to it, then turn
+     on Pages in repo Settings.
+============================================================================
+-->
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#" aria-label="Dustin Licos home">
+      <span class="nav-brand-block">DUSTIN</span>
+      <span>LICOS</span>
+    </a>
+    <button class="nav-menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-menu">
+      <span class="nav-menu-label">MENU</span>
+      <span class="nav-menu-close" aria-hidden="true">×</span>
+      <i aria-hidden="true"><b></b><b></b><b></b></i>
+    </button>
+    <nav class="nav-links" id="site-menu">
+      <a href="#tech-stack">Tech Stack</a>
+      <a href="#portfolio">Power BI Portfolio</a>
+      <a href="#about">About</a>
+      <a href="#achievement">Achievement</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero">
+  <div class="wrap hero-layout">
+    <div class="hero-copy">
+      <h1>Making Sense of Data for <span>SMARTER BUSINESS MOVES</span></h1>
+      <div class="hero-support">
+        <p>I transform scattered numbers into focused dashboards and useful insights, giving teams the clarity to act with confidence and move priorities forward.</p>
+        <a class="hero-outline-btn" href="#contact">LET'S CONNECT <span>→</span></a>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TECH STACK ============================== -->
+<section id="tech-stack">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Tech Stack</h2>
+      <p>A practical toolkit for turning complex data into clear, trusted reporting.</p>
+    </div>
+    <div class="tool-cloud" aria-label="Technology tools">
+      <span class="tool-orb tool-powerbi" data-tooltip="Builds interactive dashboards that turn business data into decisions."><img src="https://api.iconify.design/logos:microsoft-power-bi.svg" alt=""><span class="tool-name">Power BI</span></span>
+      <span class="tool-orb tool-excel" data-tooltip="Supports flexible analysis, modeling, and operational reporting."><img src="https://api.iconify.design/vscode-icons:file-type-excel2.svg" alt=""><span class="tool-name">Excel</span></span>
+      <span class="tool-orb tool-python" data-tooltip="Automates data preparation, analysis, and repeatable workflows."><img src="https://api.iconify.design/logos:python.svg" alt=""><span class="tool-name">Python</span></span>
+      <span class="tool-orb tool-postgres" data-tooltip="Stores and organizes reliable data for reporting and ETL processes."><img src="https://api.iconify.design/logos:postgresql.svg" alt=""><span class="tool-name">PostgreSQL</span></span>
+      <span class="tool-orb tool-figma" data-tooltip="Shapes clear dashboard layouts and user-friendly data experiences."><img src="https://api.iconify.design/logos:figma.svg" alt=""><span class="tool-name">Figma</span></span>
+      <span class="tool-orb tool-tableau" data-tooltip="Creates visual stories that make trends easier to understand."><img src="https://api.iconify.design/logos:tableau-icon.svg" alt=""><span class="tool-name">Tableau</span></span>
+      <span class="tool-orb tool-copilot" data-tooltip="Accelerates coding, documentation, and everyday problem-solving."><img src="https://api.iconify.design/logos:github-copilot.svg" alt=""><span class="tool-name">Copilot</span></span>
+      <span class="tool-orb tool-claude" data-tooltip="Assists with research, communication, and analytical thinking."><img src="https://api.iconify.design/logos:claude-icon.svg" alt=""><span class="tool-name">Claude AI</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PORTFOLIO ============================== -->
+<section id="portfolio">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Dashboards, not decoration</h2>
+      <p>Each project below solves a real reporting problem. Browse the static report screenshots or read through the build.</p>
+    </div>
+
+    <div class="projects-shell">
+      <div class="projects">
+
+      <!-- PROJECT 1 -->
+      <article class="project-card">
+        <div class="viz-frame">
+          <span class="viz-tag">Static previews</span>
+          <div class="dashboard-carousel" data-carousel>
+            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
+            <img class="viz-image" src="dashboard 1 images/dashboard-01-01.png" alt="Regional Sales Performance Power BI report screenshot 1">
+            <button class="carousel-arrow carousel-next" type="button" aria-label="Next screenshot">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3>Regional Sales Performance</h3>
+          <p>Executive-facing dashboard tracking revenue, margin, and rep performance across 6 regions, refreshed nightly from Azure SQL.</p>
+          <div class="project-tags"><span>Power BI</span><span>DAX</span><span>Azure SQL</span></div>
+          <a class="project-link" href="https://app.powerbi.com/view?r=eyJrIjoiNjJlNjM1ZGItY2Q0MC00ZjQ2LTg4ZDgtZjVhZTViNTg4YWQxIiwidCI6ImRmODY3OWNkLWE4MGUtNDVkOC05OWFjLWM4M2VkN2ZmOTVhMCJ9" target="_blank">View live report <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <!-- PROJECT 2 -->
+      <article class="project-card">
+        <div class="viz-frame">
+          <span class="viz-tag">Static previews</span>
+          <div class="dashboard-carousel" data-carousel>
+            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
+            <img class="viz-image" src="dashboard 2 images/dashboard-02-01.png" alt="Customer Churn Early-Warning Power BI report screenshot 1">
+            <button class="carousel-arrow carousel-next" type="button" aria-label="Next screenshot">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3>Customer Churn Early-Warning</h3>
+          <p>Predictive scoring model surfaced in Power BI so account managers can see at-risk accounts before renewal, cutting churn 0.4pts QoQ.</p>
+          <div class="project-tags"><span>Power BI</span><span>Python</span><span>dbt</span></div>
+          <a class="project-link" href="#">View live report <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <!-- PROJECT 3 -->
+      <article class="project-card">
+        <div class="viz-frame">
+          <span class="viz-tag">Static previews</span>
+          <div class="dashboard-carousel" data-carousel>
+            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
+            <img class="viz-image" src="dashboard 3 images/dashboard-03-01.png" alt="Supply Chain Cost Tracker Power BI report screenshot 1">
+            <button class="carousel-arrow carousel-next" type="button" aria-label="Next screenshot">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3>Supply Chain Cost Tracker</h3>
+          <p>Consolidated 4 spreadsheet-based reports into one automated pipeline, saving the ops team ~12 hours of manual reporting a week.</p>
+          <div class="project-tags"><span>Power Query</span><span>Azure Data Factory</span></div>
+          <a class="project-link" href="#">Read the write-up <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <!-- PROJECT 4 -->
+      <article class="project-card">
+        <div class="viz-frame">
+          <span class="viz-tag">Static previews</span>
+          <div class="dashboard-carousel" data-carousel>
+            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
+            <img class="viz-image" src="dashboard 4 images/dashboard-04-01.png" alt="Marketing Attribution Model Power BI report screenshot 1">
+            <button class="carousel-arrow carousel-next" type="button" aria-label="Next screenshot">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3>Marketing Attribution Model</h3>
+          <p>Multi-touch attribution dashboard blending ad spend, CRM, and web analytics data to show true channel ROI.</p>
+          <div class="project-tags"><span>Power BI</span><span>SQL</span><span>Google Analytics</span></div>
+          <a class="project-link" href="#">View live report <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ABOUT ============================== -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <div class="sec-head" style="margin-bottom:0;">
+        <h2>About Me</h2>
+      </div>
+      <h3>Hi, I'm <span>Dustin Licos</span></h3>
+      <p class="about-role"><strong>Senior PMO Specialist</strong> in an IT company</p>
+      <p>I work closely with <strong>Finance, WFM, Quality, HR, AI Delivery teams, and senior leadership</strong>, bringing four years of experience in <strong>PMO, project governance, data analysis, advanced dashboard development, and business reporting</strong>.</p>
+      <p>I specialize in developing <strong>Power BI dashboards</strong>, automating reporting processes, and transforming complex data into actionable business insights. My experience includes <strong>data governance, performance tracking, and cross-functional collaboration</strong> to support data-driven decision-making and business performance.</p>
+      <a class="btn btn-ghost about-resume" href="resume pdf/resume.pdf" target="_blank" rel="noopener">
+        <svg class="resume-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 3v11m0 0 4-4m-4 4-4-4M5 18v2h14v-2"></path>
+        </svg>
+        RESUME
+      </a>
+    </div>
+    <div class="about-photo">
+      <span class="hero-photo">
+        <span class="hero-photo-frame">
+          <img src="profile picture image/profile.jpg" alt="Dustin Licos" onerror="this.remove(); this.parentElement.parentElement.classList.add('photo-fallback')">
+          <span class="photo-fallback-initials">DL</span>
+        </span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ACHIEVEMENT ============================== -->
+<section id="achievement">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Results that make a difference</h2>
+      <p>Selected outcomes from improving reporting, automation, and business intelligence workflows.</p>
+    </div>
+    <div class="achievement-grid">
+      <div class="achievement-highlights">
+        <article class="achievement-feature" tabindex="0">
+          <div class="achievement-value">USD 23,400</div>
+          <h3>Saved through Power BI reporting</h3>
+          <p>Introduced Microsoft Power BI reporting solutions that eliminated the need for costly custom report development, resulting in approximately <strong>USD 23,400 in cost savings</strong>.</p>
+        </article>
+        <article class="achievement-feature" tabindex="0">
+          <div class="achievement-value">USD 50,000</div>
+          <h3>Saved by retiring Polaris</h3>
+          <p>Implemented a reporting solution that enabled the organization to retire Polaris while maintaining its reporting capabilities, resulting in approximately <strong>USD 50,000 in cost savings</strong>.</p>
+        </article>
+      </div>
+      <div class="impact-list">
+        <div class="impact-row" tabindex="0">
+          <span class="impact-question">How much faster was month-end close after the dashboard rebuild?</span>
+          <span class="impact-answer"><span class="metric">33%</span> faster month-end close</span>
+        </div>
+        <div class="impact-row" tabindex="0">
+          <span class="impact-question">How many hours were saved weekly by automating manual reports?</span>
+          <span class="impact-answer"><span class="metric">12 hrs</span> saved weekly</span>
+        </div>
+        <div class="impact-row" tabindex="0">
+          <span class="impact-question">How many teams moved to self-serve Power BI reporting?</span>
+          <span class="impact-answer"><span class="metric">6</span> teams onboarded</span>
+        </div>
+        <div class="impact-row" tabindex="0">
+          <span class="impact-question">What was the on-time data refresh reliability?</span>
+          <span class="impact-answer"><span class="metric">98%</span> on-time refresh reliability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CERTIFICATIONS ============================== -->
+<section id="certifications">
+  <div class="wrap certifications-layout">
+    <div class="sec-head">
+      <h2>Certifications</h2>
+      <p>A growing record of professional learning and credentials earned throughout my career.</p>
+    </div>
+    <div class="certification-list" role="list">
+      <div class="certification-item" tabindex="0" role="listitem">
+        <img src="certification images/certification-01.png" alt="DICT Power BI Certificate">
+        <div class="certification-details">
+          <strong>DICT Power BI Certificate</strong>
+          <time datetime="">July 2024</time>
+        </div>
+      </div>
+      <div class="certification-item" tabindex="0" role="listitem">
+        <img src="certification images/certification-02.jpg" alt="Certification 02" onerror="this.remove()">
+        <div class="certification-details">
+          <strong>Prompt Engineering for Work</strong>
+          <time datetime="">June 2026</time>
+        </div>
+      </div>
+      <div class="certification-item" tabindex="0" role="listitem">
+        <img src="certification-03.png" alt="Certification 03" onerror="this.remove()">
+        <div class="certification-details">
+          <strong>Certification Name 03</strong>
+          <time datetime="">Year obtained: Add year</time>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CONTACT ============================== -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div>
+        <h2>Let's talk about your data.</h2>
+        <p>Open to analyst, BI developer, and data storytelling roles — remote or hybrid. Reach out however's easiest.</p>
+      </div>
+      <div class="contact-links">
+        <button class="contact-trigger" type="button" data-contact="email">
+          <span class="contact-label"><span class="contact-icon" aria-hidden="true">✉</span>Email</span><span class="arrow">→</span>
+        </button>
+        <button class="contact-trigger" type="button" data-contact="phone">
+          <span class="contact-label"><span class="contact-icon" aria-hidden="true">☎</span>Mobile Number</span><span class="arrow">→</span>
+        </button>
+        <a href="https://www.linkedin.com/in/dustin-licos-b08215243/" target="_blank" rel="noopener">
+          <span class="contact-label"><span class="contact-icon" aria-hidden="true">in</span>LinkedIn</span><span class="arrow">→</span>
+        </a>
+        <a href="https://github.com/dustinlicos" target="_blank" rel="noopener">
+          <span class="contact-label"><span class="contact-icon" aria-hidden="true">◉</span>GitHub</span><span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" hidden>
+  <div class="contact-modal-card">
+    <button class="contact-modal-close" type="button" aria-label="Close contact details">&times;</button>
+    <label class="contact-modal-label" for="contact-value">Copy this detail</label>
+    <div class="contact-copy-row">
+      <input id="contact-value" type="text" readonly>
+      <button id="copy-contact" type="button">Copy</button>
+    </div>
+    <p class="copy-status" aria-live="polite"></p>
+  </div>
+</div>
+
+<footer>
+  © <span id="year"></span> Dustin Licos · Built with HTML, CSS & a little Power BI
+</footer>
+
+
+<script src="script.js"></script>
+</body>
+</html>

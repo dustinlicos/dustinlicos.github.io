@@ -482,16 +482,26 @@
   .tool-copilot{ --tool-color:#8a93ff; --tilt:6deg; left:32%; top:34%; min-width:200px; min-height:115px; font-size:1.05rem; z-index:2; }
   .tool-claude{ --tool-color:#d97757; --tilt:3deg; left:43%; top:69%; min-width:195px; min-height:105px; font-size:1rem; }
   @media (max-width:600px){
-    .tool-cloud{ width:calc(100% - 96px); min-height:600px; }
-    .tool-orb{ font-size:.68rem; min-width:90px; min-height:64px; padding:9px 10px; }
-    .tool-powerbi{ left:50%; margin-left:-82px; top:7%; min-width:165px; min-height:110px; }
-    .tool-excel{ left:42%; top:7%; min-width:150px; min-height:100px; }
-    .tool-python{ left:39%; top:31%; min-width:145px; min-height:88px; font-size:.76rem; }
-    .tool-postgres{ left:4%; top:56%; min-width:175px; min-height:95px; }
-    .tool-figma{ left:59%; top:25%; min-width:120px; }
-    .tool-tableau{ left:59%; top:62%; }
-    .tool-copilot{ left:10%; top:32%; min-width:125px; }
-    .tool-claude{ left:38%; top:75%; min-width:125px; }
+    .tool-cloud{
+      width:100%; min-height:0; padding:16px; display:grid;
+      grid-template-columns:1fr; gap:16px;
+    }
+    .tool-orb,
+    .tool-powerbi,
+    .tool-excel,
+    .tool-python,
+    .tool-postgres,
+    .tool-figma,
+    .tool-tableau,
+    .tool-copilot,
+    .tool-claude{
+      position:relative; inset:auto; left:auto; top:auto; margin:0;
+      width:100%; min-width:0; min-height:116px; padding:14px;
+      transform:none; font-size:.82rem;
+    }
+    .tool-orb:hover,
+    .tool-orb:focus-visible{ transform:translateY(-3px); }
+    .tool-orb img{ width:32px; height:32px; }
   }
 
   /* ---------------------------------- PORTFOLIO ---------------------------------- */

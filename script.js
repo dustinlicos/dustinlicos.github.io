@@ -16,16 +16,28 @@
   window.addEventListener('load', () => {
     document.querySelectorAll('[data-carousel]').forEach((carousel) => {
       const image = carousel.querySelector('.viz-image');
+      const prev = carousel.querySelector('.carousel-prev');
+      const next = carousel.querySelector('.carousel-next');
+      const screenshotCount = Number(carousel.dataset.screenshots || '1');
+
+      if (!image) return;
+
+      if (screenshotCount <= 1) {
+        if (prev) prev.hidden = true;
+        if (next) next.hidden = true;
+        return;
+      }
+
       const prefix = image.src.replace(/-\d{2}\.[^.]+$/, '');
       const extension = image.src.match(/\.[^.]+$/)[0];
       let current = 1;
       const showScreenshot = (step) => {
-        current = ((current - 1 + step + 4) % 4) + 1;
+        current = ((current - 1 + step + screenshotCount) % screenshotCount) + 1;
         image.src = `${prefix}-${String(current).padStart(2, '0')}${extension}`;
         image.alt = image.alt.replace(/ screenshot \d+$/, ` screenshot ${current}`);
       };
-      carousel.querySelector('.carousel-prev').addEventListener('click', () => showScreenshot(-1));
-      carousel.querySelector('.carousel-next').addEventListener('click', () => showScreenshot(1));
+      prev?.addEventListener('click', () => showScreenshot(-1));
+      next?.addEventListener('click', () => showScreenshot(1));
     });
 
     document.querySelectorAll('.projects').forEach((projects) => {
@@ -127,41 +139,36 @@
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
+  });
 
-    const contactModal = document.getElementById('contact-modal');
-    const contactValue = document.getElementById('contact-value');
-    const copyContact = document.getElementById('copy-contact');
-    const copyStatus = document.querySelector('.copy-status');
-    const closeContactModal = () => {
-      contactModal.hidden = true;
-      copyStatus.textContent = '';
-    };
+  const certModal = document.getElementById('cert-modal');
+  const certModalImage = document.getElementById('cert-modal-image');
+  const certModalClose = document.querySelector('.cert-modal-close');
+  const closeCertModal = () => {
+    if (!certModal) return;
+    certModal.hidden = true;
+    document.body.classList.remove('modal-open');
+  };
 
-    document.querySelectorAll('.contact-trigger').forEach((trigger) => {
-      trigger.addEventListener('click', () => {
-        contactValue.value = trigger.dataset.contact === 'email'
-          ? 'DLicos8013@gmail.com'
-          : '+63 962 782 4967';
-        contactModal.hidden = false;
-        contactValue.focus();
-        contactValue.select();
-      });
+  document.querySelectorAll('.certification-item').forEach((item) => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+      const previewImage = item.querySelector('img');
+      if (!previewImage || !certModal || !certModalImage) return;
+      certModalImage.src = previewImage.src;
+      certModalImage.alt = previewImage.alt;
+      certModal.hidden = false;
+      document.body.classList.add('modal-open');
     });
-    document.querySelector('.contact-modal-close').addEventListener('click', closeContactModal);
-    contactModal.addEventListener('click', (event) => {
-      if (event.target === contactModal) closeContactModal();
+  });
+
+  if (certModalClose && certModal) {
+    certModalClose.addEventListener('click', closeCertModal);
+    certModal.addEventListener('click', (event) => {
+      if (event.target === certModal) closeCertModal();
     });
-    copyContact.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(contactValue.value);
-        copyStatus.textContent = 'Copied to clipboard.';
-      } catch (error) {
-        contactValue.focus();
-        contactValue.select();
-        copyStatus.textContent = 'Select the detail and copy it manually.';
-      }
-    });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !contactModal.hidden) closeContactModal();
-    });
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && certModal && !certModal.hidden) closeCertModal();
   });

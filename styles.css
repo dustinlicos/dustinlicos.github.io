@@ -776,14 +776,43 @@
   }
   .dashboard-modal-card{
    position:relative; width:min(1400px, 96vw); height:min(90vh, 900px);
-   display:flex; align-items:center; justify-content:center; padding:24px 64px;
+   display:flex; flex-direction:column; align-items:stretch; gap:10px; padding:24px 64px;
    border:1px solid var(--blue-dim); border-radius:18px;
    background:linear-gradient(180deg, rgba(14,22,34,.96), rgba(10,17,26,.94));
    box-shadow:0 32px 90px -30px rgba(0,0,0,.85);
   }
-  .dashboard-modal-card img{
-   display:block; width:100%; height:100%; object-fit:contain;
-   border-radius:10px; background:rgba(255,255,255,.02);
+  .dashboard-modal-info{
+   display:flex; align-items:center; justify-content:space-between; gap:18px;
+   min-height:58px; padding:0 4px;
+  }
+  .dashboard-modal-info h2{ margin:0; color:var(--text); font-size:1.12rem; }
+  .dashboard-modal-tools{ margin:4px 0 0; color:var(--text-muted); font-size:.78rem; }
+  .dashboard-modal-live-link{
+   flex:none; display:inline-flex; align-items:center; gap:7px; padding:8px 12px;
+   border:1px solid var(--blue-dim); border-radius:7px; color:var(--blue-bright);
+   font-size:.82rem; font-weight:600; text-decoration:none;
+   background:rgba(63,196,255,.07); transition:background .2s ease, border-color .2s ease;
+  }
+  .dashboard-modal-live-link:hover,.dashboard-modal-live-link:focus-visible{
+   border-color:var(--blue-bright); background:rgba(63,196,255,.14);
+  }
+  .dashboard-modal-live-link[hidden]{ display:none; }
+  .dashboard-modal-viewport{
+   position:relative; flex:1; width:100%; min-width:0; min-height:0;
+   overflow:hidden; touch-action:none;
+  }
+  .dashboard-modal-hint{
+   flex:none; align-self:center; margin:0; padding:5px 9px; border-radius:5px;
+   background:rgba(6,10,20,.62); color:var(--text-muted); font-size:.72rem;
+   line-height:1.2; text-align:center; white-space:nowrap; opacity:.88;
+   pointer-events:none; backdrop-filter:blur(3px);
+  }
+  .dashboard-modal-viewport.is-zoomed{ cursor:grab; }
+  .dashboard-modal-viewport.is-dragging{ cursor:grabbing; }
+  .dashboard-modal-viewport img{
+   position:absolute; top:50%; left:50%; display:block; width:100%; height:100%;
+   object-fit:contain; border-radius:10px; background:rgba(255,255,255,.02);
+   transform-origin:center; user-select:none; -webkit-user-drag:none;
   }
   .dashboard-modal-close,.dashboard-modal-arrow{
    position:absolute; z-index:2; display:grid; place-items:center;
@@ -812,7 +841,12 @@
     .cert-modal{ padding:18px; }
     .cert-modal-card{ width:min(94vw, 100%); }
     .dashboard-modal{ padding:12px; }
-    .dashboard-modal-card{ width:100%; height:88vh; padding:48px 42px; }
+    .dashboard-modal-card{ width:100%; height:88vh; gap:8px; padding:48px 42px 16px; }
+    .dashboard-modal-info{ align-items:flex-start; flex-direction:column; justify-content:center; gap:8px; }
+    .dashboard-modal-info h2{ font-size:1rem; }
+    .dashboard-modal-tools{ font-size:.7rem; }
+    .dashboard-modal-live-link{ padding:6px 9px; font-size:.75rem; }
+    .dashboard-modal-hint{ font-size:.66rem; }
     .dashboard-modal-prev{ left:4px; }
     .dashboard-modal-next{ right:4px; }
   }

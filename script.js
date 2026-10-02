@@ -15,17 +15,45 @@
 
   const dashboardModal = document.getElementById('dashboard-modal');
   const dashboardModalImage = document.getElementById('dashboard-modal-image');
+  const dashboardModalViewport = document.querySelector('.dashboard-modal-viewport');
+  const dashboardModalTitle = document.getElementById('dashboard-modal-title');
+  const dashboardModalTools = document.querySelector('.dashboard-modal-tools');
+  const dashboardModalLiveLink = document.querySelector('.dashboard-modal-live-link');
   const dashboardModalClose = document.querySelector('.dashboard-modal-close');
   const dashboardModalPrev = document.querySelector('.dashboard-modal-prev');
   const dashboardModalNext = document.querySelector('.dashboard-modal-next');
   let activeDashboardNavigate = null;
   let dashboardModalReturnFocus = null;
+  let dashboardZoom = 1;
+  let dashboardPanX = 0;
+  let dashboardPanY = 0;
+  let dashboardDrag = null;
+  const clampDashboardPan = () => {
+    if (!dashboardModalViewport) return;
+    const maxX = dashboardModalViewport.clientWidth * (dashboardZoom - 1) / 2;
+    const maxY = dashboardModalViewport.clientHeight * (dashboardZoom - 1) / 2;
+    dashboardPanX = Math.max(-maxX, Math.min(maxX, dashboardPanX));
+    dashboardPanY = Math.max(-maxY, Math.min(maxY, dashboardPanY));
+  };
+  const renderDashboardTransform = () => {
+    if (!dashboardModalImage) return;
+    dashboardModalImage.style.transform =
+      `translate(calc(-50% + ${dashboardPanX}px), calc(-50% + ${dashboardPanY}px)) scale(${dashboardZoom})`;
+    dashboardModalViewport?.classList.toggle('is-zoomed', dashboardZoom > 1);
+  };
+  const resetDashboardTransform = () => {
+    dashboardZoom = 1;
+    dashboardPanX = 0;
+    dashboardPanY = 0;
+    renderDashboardTransform();
+  };
   const closeDashboardModal = () => {
     if (!dashboardModal) return;
     dashboardModal.hidden = true;
     document.body.classList.remove('modal-open');
     dashboardModalReturnFocus?.focus();
     activeDashboardNavigate = null;
+    resetDashboardTransform();
   };
 
   window.addEventListener('load', () => {
@@ -34,6 +62,7 @@
       const prev = carousel.querySelector('.carousel-prev');
       const next = carousel.querySelector('.carousel-next');
       const expand = carousel.querySelector('.dashboard-expand');
+      const projectCard = carousel.closest('.project-card');
       const screenshotCount = Number(carousel.dataset.screenshots || '1');
       let showScreenshot = null;
 
@@ -53,6 +82,7 @@
           if (activeDashboardNavigate === showScreenshot && dashboardModalImage) {
             dashboardModalImage.src = image.src;
             dashboardModalImage.alt = image.alt;
+            resetDashboardTransform();
           }
         };
         if (prev) prev.hidden = false;
@@ -67,6 +97,20 @@
         dashboardModalReturnFocus = trigger;
         dashboardModalImage.src = image.src;
         dashboardModalImage.alt = image.alt;
+        const projectTitle = projectCard?.querySelector('.project-body h3')?.textContent.trim() || image.alt;
+        const projectTools = [...(projectCard?.querySelectorAll('.project-tags span') || [])]
+          .map((tag) => tag.textContent.trim())
+          .filter(Boolean);
+        const reportLink = projectCard?.querySelector('.project-link[href^="https://"], .project-link[href^="http://"]');
+        if (dashboardModalTitle) dashboardModalTitle.textContent = projectTitle;
+        if (dashboardModalTools) dashboardModalTools.textContent = projectTools.length
+          ? `Tools: ${projectTools.join(' · ')}`
+          : '';
+        if (dashboardModalLiveLink) {
+          dashboardModalLiveLink.hidden = !reportLink;
+          dashboardModalLiveLink.href = reportLink?.href || '';
+        }
+        resetDashboardTransform();
         if (dashboardModalPrev) dashboardModalPrev.hidden = screenshotCount <= 1;
         if (dashboardModalNext) dashboardModalNext.hidden = screenshotCount <= 1;
         dashboardModal.hidden = false;
@@ -107,6 +151,47 @@
     }
     dashboardModalPrev?.addEventListener('click', () => activeDashboardNavigate?.(-1));
     dashboardModalNext?.addEventListener('click', () => activeDashboardNavigate?.(1));
+    dashboardModalViewport?.addEventListener('wheel', (event) => {
+      if (event.deltaY === 0) return;
+      event.preventDefault();
+      const previousZoom = dashboardZoom;
+      dashboardZoom = Math.max(1, Math.min(4, dashboardZoom * (event.deltaY < 0 ? 1.15 : 1 / 1.15)));
+      if (dashboardZoom === 1) {
+        dashboardPanX = 0;
+        dashboardPanY = 0;
+      } else {
+        const bounds = dashboardModalViewport.getBoundingClientRect();
+        const pointerX = event.clientX - bounds.left - bounds.width / 2;
+        const pointerY = event.clientY - bounds.top - bounds.height / 2;
+        const zoomRatio = dashboardZoom / previousZoom;
+        dashboardPanX = pointerX - (pointerX - dashboardPanX) * zoomRatio;
+        dashboardPanY = pointerY - (pointerY - dashboardPanY) * zoomRatio;
+        clampDashboardPan();
+      }
+      renderDashboardTransform();
+    }, { passive: false });
+    dashboardModalViewport?.addEventListener('pointerdown', (event) => {
+      if (dashboardZoom <= 1 || event.button !== 0) return;
+      dashboardDrag = { pointerId: event.pointerId, x: event.clientX, y: event.clientY };
+      dashboardModalViewport.classList.add('is-dragging');
+      dashboardModalViewport.setPointerCapture(event.pointerId);
+    });
+    dashboardModalViewport?.addEventListener('pointermove', (event) => {
+      if (!dashboardDrag || dashboardDrag.pointerId !== event.pointerId) return;
+      dashboardPanX += event.clientX - dashboardDrag.x;
+      dashboardPanY += event.clientY - dashboardDrag.y;
+      clampDashboardPan();
+      dashboardDrag.x = event.clientX;
+      dashboardDrag.y = event.clientY;
+      renderDashboardTransform();
+    });
+    const endDashboardDrag = (event) => {
+      if (!dashboardDrag || dashboardDrag.pointerId !== event.pointerId) return;
+      dashboardDrag = null;
+      dashboardModalViewport?.classList.remove('is-dragging');
+    };
+    dashboardModalViewport?.addEventListener('pointerup', endDashboardDrag);
+    dashboardModalViewport?.addEventListener('pointercancel', endDashboardDrag);
 
     document.querySelectorAll('.stat .num[data-target]').forEach((el) => {
       const target = parseFloat(el.dataset.target);

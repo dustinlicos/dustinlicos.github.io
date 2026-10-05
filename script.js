@@ -15,6 +15,7 @@
 
   const dashboardModal = document.getElementById('dashboard-modal');
   const dashboardModalImage = document.getElementById('dashboard-modal-image');
+  const dashboardModalImagePlaceholder = document.querySelector('.dashboard-modal-image-placeholder');
   const dashboardModalViewport = document.querySelector('.dashboard-modal-viewport');
   const dashboardModalTitle = document.getElementById('dashboard-modal-title');
   const dashboardModalTools = document.querySelector('.dashboard-modal-tools');
@@ -22,7 +23,9 @@
   const dashboardModalClose = document.querySelector('.dashboard-modal-close');
   const dashboardModalPrev = document.querySelector('.dashboard-modal-prev');
   const dashboardModalNext = document.querySelector('.dashboard-modal-next');
+  const dashboardModalPagination = document.querySelector('.dashboard-modal-pagination');
   let activeDashboardNavigate = null;
+  let activeDashboardNavigateTo = null;
   let dashboardModalReturnFocus = null;
   let dashboardZoom = 1;
   let dashboardPanX = 0;
@@ -47,26 +50,47 @@
     dashboardPanY = 0;
     renderDashboardTransform();
   };
+  const updateDashboardPagination = (container, current) => {
+    container?.querySelectorAll('.dashboard-pagination-dot').forEach((dot, index) => {
+      const isCurrent = index + 1 === current;
+      dot.classList.toggle('is-current', isCurrent);
+      dot.setAttribute('aria-current', String(isCurrent));
+    });
+  };
   const closeDashboardModal = () => {
     if (!dashboardModal) return;
     dashboardModal.hidden = true;
     document.body.classList.remove('modal-open');
     dashboardModalReturnFocus?.focus();
     activeDashboardNavigate = null;
+    activeDashboardNavigateTo = null;
+    dashboardModalPagination?.replaceChildren();
     resetDashboardTransform();
   };
 
   window.addEventListener('load', () => {
     document.querySelectorAll('[data-carousel]').forEach((carousel) => {
       const image = carousel.querySelector('.viz-image');
+      const imagePlaceholder = carousel.querySelector('.dashboard-image-placeholder');
       const prev = carousel.querySelector('.carousel-prev');
       const next = carousel.querySelector('.carousel-next');
       const expand = carousel.querySelector('.dashboard-expand');
+      const cardPagination = carousel.querySelector('.dashboard-card-pagination');
       const projectCard = carousel.closest('.project-card');
       const screenshotCount = Number(carousel.dataset.screenshots || '1');
       let showScreenshot = null;
+      let goToScreenshot = null;
+      let currentScreenshot = 1;
 
       if (!image) return;
+
+      const setImageAvailability = (available) => {
+        image.hidden = !available;
+        if (imagePlaceholder) imagePlaceholder.hidden = available;
+      };
+      image.addEventListener('load', () => setImageAvailability(true));
+      image.addEventListener('error', () => setImageAvailability(false));
+      if (image.complete) setImageAvailability(image.naturalWidth > 0);
 
       if (screenshotCount <= 1) {
         if (prev) prev.hidden = true;
@@ -74,28 +98,50 @@
       } else {
         const prefix = image.getAttribute('src').replace(/-\d{2}\.[^.]+$/, '');
         const extension = image.getAttribute('src').match(/\.[^.]+$/)[0];
-        let current = 1;
-        showScreenshot = (step) => {
-          current = ((current - 1 + step + screenshotCount) % screenshotCount) + 1;
-          image.src = `${prefix}-${String(current).padStart(2, '0')}${extension}`;
-          image.alt = image.alt.replace(/ screenshot \d+$/, ` screenshot ${current}`);
+        goToScreenshot = (screenshot) => {
+          currentScreenshot = screenshot;
+          setImageAvailability(false);
+          image.src = `${prefix}-${String(currentScreenshot).padStart(2, '0')}${extension}`;
+          image.alt = image.alt.replace(/ screenshot \d+$/, ` screenshot ${currentScreenshot}`);
+          updateDashboardPagination(cardPagination, currentScreenshot);
           if (activeDashboardNavigate === showScreenshot && dashboardModalImage) {
+            dashboardModalImage.hidden = true;
+            if (dashboardModalImagePlaceholder) dashboardModalImagePlaceholder.hidden = false;
             dashboardModalImage.src = image.src;
             dashboardModalImage.alt = image.alt;
+            updateDashboardPagination(dashboardModalPagination, currentScreenshot);
             resetDashboardTransform();
           }
+        };
+        showScreenshot = (step) => {
+          goToScreenshot(((currentScreenshot - 1 + step + screenshotCount) % screenshotCount) + 1);
         };
         if (prev) prev.hidden = false;
         if (next) next.hidden = false;
         prev?.addEventListener('click', () => showScreenshot(-1));
         next?.addEventListener('click', () => showScreenshot(1));
       }
+      if (cardPagination) {
+        cardPagination.replaceChildren();
+        for (let screenshot = 1; screenshot <= screenshotCount; screenshot += 1) {
+          const dot = document.createElement('button');
+          dot.className = 'dashboard-pagination-dot';
+          dot.type = 'button';
+          dot.setAttribute('aria-label', `Show screenshot ${screenshot} of ${screenshotCount}`);
+          dot.addEventListener('click', () => goToScreenshot?.(screenshot));
+          cardPagination.append(dot);
+        }
+        updateDashboardPagination(cardPagination, currentScreenshot);
+      }
 
       const openPreview = (trigger) => {
         if (!dashboardModal || !dashboardModalImage) return;
         activeDashboardNavigate = showScreenshot;
+        activeDashboardNavigateTo = goToScreenshot;
         dashboardModalReturnFocus = trigger;
-        dashboardModalImage.src = image.src;
+        dashboardModalImage.hidden = true;
+        if (dashboardModalImagePlaceholder) dashboardModalImagePlaceholder.hidden = false;
+        dashboardModalImage.src = image.currentSrc || image.src;
         dashboardModalImage.alt = image.alt;
         const projectTitle = projectCard?.querySelector('.project-body h3')?.textContent.trim() || image.alt;
         const projectTools = [...(projectCard?.querySelectorAll('.project-tags span') || [])]
@@ -109,6 +155,18 @@
         if (dashboardModalLiveLink) {
           dashboardModalLiveLink.hidden = !reportLink;
           dashboardModalLiveLink.href = reportLink?.href || '';
+        }
+        if (dashboardModalPagination) {
+          dashboardModalPagination.replaceChildren();
+          for (let screenshot = 1; screenshot <= screenshotCount; screenshot += 1) {
+            const dot = document.createElement('button');
+            dot.className = 'dashboard-pagination-dot';
+            dot.type = 'button';
+            dot.setAttribute('aria-label', `Show screenshot ${screenshot} of ${screenshotCount}`);
+            dot.addEventListener('click', () => activeDashboardNavigateTo?.(screenshot));
+            dashboardModalPagination.append(dot);
+          }
+          updateDashboardPagination(dashboardModalPagination, currentScreenshot);
         }
         resetDashboardTransform();
         if (dashboardModalPrev) dashboardModalPrev.hidden = screenshotCount <= 1;
@@ -151,6 +209,14 @@
     }
     dashboardModalPrev?.addEventListener('click', () => activeDashboardNavigate?.(-1));
     dashboardModalNext?.addEventListener('click', () => activeDashboardNavigate?.(1));
+    dashboardModalImage?.addEventListener('load', () => {
+      dashboardModalImage.hidden = false;
+      if (dashboardModalImagePlaceholder) dashboardModalImagePlaceholder.hidden = true;
+    });
+    dashboardModalImage?.addEventListener('error', () => {
+      dashboardModalImage.hidden = true;
+      if (dashboardModalImagePlaceholder) dashboardModalImagePlaceholder.hidden = false;
+    });
     dashboardModalViewport?.addEventListener('wheel', (event) => {
       if (event.deltaY === 0) return;
       event.preventDefault();

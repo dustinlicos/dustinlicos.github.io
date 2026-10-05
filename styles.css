@@ -542,6 +542,17 @@
   }
   .dashboard-carousel{ position:relative; width:100%; height:100%; }
   .viz-frame .viz-image{ width:100%; height:100%; object-fit:cover; display:block; cursor:zoom-in; }
+  .dashboard-carousel .viz-image[hidden],.dashboard-modal-viewport img[hidden]{ display:none; }
+  .dashboard-image-placeholder{
+   position:absolute; inset:0; display:flex; flex-direction:column;
+   align-items:center; justify-content:center; gap:8px; padding:24px;
+   background:radial-gradient(ellipse at center, rgba(63,196,255,.08), transparent 66%),
+              linear-gradient(160deg, #111b2b, #0a1220);
+   color:var(--text-dim); text-align:center;
+  }
+  .dashboard-image-placeholder[hidden]{ display:none; }
+  .dashboard-image-placeholder strong{ color:var(--text); font-size:1.05rem; }
+  .dashboard-image-placeholder span{ color:var(--text-faint); font-size:.82rem; }
   .dashboard-expand{
     position:absolute; top:12px; right:12px; z-index:2;
     width:38px; height:38px; display:grid; place-items:center; padding:8px;
@@ -552,6 +563,16 @@
     opacity:1; color:var(--blue-bright); background:rgba(6,12,22,.92);
   }
   .dashboard-expand svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .dashboard-card-pagination{
+   position:absolute; z-index:2; bottom:12px; left:50%; transform:translateX(-50%);
+   display:flex; align-items:center; justify-content:center; gap:8px;
+   padding:6px 10px; border:1px solid rgba(255,255,255,.3); border-radius:999px;
+   background:linear-gradient(145deg, rgba(222,228,234,.42), rgba(191,204,216,.24));
+   box-shadow:0 2px 10px rgba(8,15,24,.14), inset 0 1px rgba(255,255,255,.24);
+   backdrop-filter:blur(12px) saturate(140%); -webkit-backdrop-filter:blur(12px) saturate(140%);
+  }
+  .dashboard-card-pagination:empty{ display:none; }
+  .dashboard-card-pagination .dashboard-pagination-dot{ width:8px; height:8px; }
   .carousel-arrow{
     position:absolute; top:50%; z-index:2; transform:translateY(-50%);
     width:34px; height:34px; border:1px solid var(--blue-dim); border-radius:50%;
@@ -807,12 +828,37 @@
    line-height:1.2; text-align:center; white-space:nowrap; opacity:.88;
    pointer-events:none; backdrop-filter:blur(3px);
   }
+  .dashboard-modal-pagination{
+   display:flex; flex:none; align-self:center; justify-content:center; align-items:center; gap:8px;
+   min-height:24px; padding:0 10px; border:1px solid rgba(255,255,255,.3);
+   border-radius:999px;
+   background:linear-gradient(145deg, rgba(255,255,255,.28), rgba(225,235,245,.12));
+   box-shadow:0 2px 10px rgba(8,15,24,.14), inset 0 1px rgba(255,255,255,.24);
+   backdrop-filter:blur(12px) saturate(140%); -webkit-backdrop-filter:blur(12px) saturate(140%);
+  }
+  .dashboard-pagination-dot{
+   width:9px; height:9px; padding:0; border:1px solid rgba(34,52,66,.56);
+   border-radius:50%; background:rgba(239,245,249,.88); opacity:1; cursor:pointer;
+   box-shadow:0 1px 2px rgba(8,15,24,.24), inset 0 1px rgba(255,255,255,.8);
+   transition:background .2s ease, border-color .2s ease, opacity .2s ease, transform .2s ease;
+  }
+  .dashboard-pagination-dot:hover,.dashboard-pagination-dot:focus-visible{
+   border-color:var(--blue-bright); outline:none; transform:scale(1.2);
+  }
+  .dashboard-pagination-dot.is-current{
+   border-color:#486b7b; background:#66899a;
+   box-shadow:0 0 0 1px rgba(255,255,255,.8), inset 0 1px rgba(255,255,255,.22);
+  }
   .dashboard-modal-viewport.is-zoomed{ cursor:grab; }
   .dashboard-modal-viewport.is-dragging{ cursor:grabbing; }
   .dashboard-modal-viewport img{
    position:absolute; top:50%; left:50%; display:block; width:100%; height:100%;
    object-fit:contain; border-radius:10px; background:rgba(255,255,255,.02);
    transform-origin:center; user-select:none; -webkit-user-drag:none;
+  }
+  .dashboard-modal-image-placeholder{
+   border-radius:10px; background:radial-gradient(ellipse at center, rgba(63,196,255,.1), transparent 66%),
+                       linear-gradient(160deg, #111b2b, #0a1220);
   }
   .dashboard-modal-close,.dashboard-modal-arrow{
    position:absolute; z-index:2; display:grid; place-items:center;

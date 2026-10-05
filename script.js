@@ -24,6 +24,9 @@
   const dashboardModalPrev = document.querySelector('.dashboard-modal-prev');
   const dashboardModalNext = document.querySelector('.dashboard-modal-next');
   const dashboardModalPagination = document.querySelector('.dashboard-modal-pagination');
+  const reportFontDialog = document.getElementById('report-font-dialog');
+  const reportFontCancel = document.querySelector('.report-font-cancel');
+  const reportFontContinue = document.querySelector('.report-font-continue');
   let activeDashboardNavigate = null;
   let activeDashboardNavigateTo = null;
   let dashboardModalReturnFocus = null;
@@ -31,6 +34,18 @@
   let dashboardPanX = 0;
   let dashboardPanY = 0;
   let dashboardDrag = null;
+  let pendingReportUrl = '';
+  let reportDialogReturnFocus = null;
+  const closeReportFontDialog = () => {
+    if (!reportFontDialog) return;
+    reportFontDialog.hidden = true;
+    if (dashboardModal?.hidden && document.getElementById('cert-modal')?.hidden !== false) {
+      document.body.classList.remove('modal-open');
+    }
+    reportDialogReturnFocus?.focus();
+    reportDialogReturnFocus = null;
+    pendingReportUrl = '';
+  };
   const clampDashboardPan = () => {
     if (!dashboardModalViewport) return;
     const maxX = dashboardModalViewport.clientWidth * (dashboardZoom - 1) / 2;
@@ -207,6 +222,26 @@
         if (event.target === dashboardModal) closeDashboardModal();
       });
     }
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a.project-link[href^="https://app.powerbi.com/"], a.dashboard-modal-live-link');
+      if (!link) return;
+      event.preventDefault();
+      if (!reportFontDialog) return;
+      pendingReportUrl = link.href;
+      reportDialogReturnFocus = link;
+      reportFontDialog.hidden = false;
+      document.body.classList.add('modal-open');
+      reportFontCancel?.focus();
+    });
+    reportFontCancel?.addEventListener('click', closeReportFontDialog);
+    reportFontContinue?.addEventListener('click', () => {
+      if (!pendingReportUrl) return;
+      window.open(pendingReportUrl, '_blank', 'noopener');
+      closeReportFontDialog();
+    });
+    reportFontDialog?.addEventListener('click', (event) => {
+      if (event.target === reportFontDialog) closeReportFontDialog();
+    });
     dashboardModalPrev?.addEventListener('click', () => activeDashboardNavigate?.(-1));
     dashboardModalNext?.addEventListener('click', () => activeDashboardNavigate?.(1));
     dashboardModalImage?.addEventListener('load', () => {
@@ -377,6 +412,10 @@
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && certModal && !certModal.hidden) closeCertModal();
+    if (event.key === 'Escape' && reportFontDialog && !reportFontDialog.hidden) {
+      closeReportFontDialog();
+      return;
+    }
     if (!dashboardModal || dashboardModal.hidden) return;
     if (event.key === 'Escape') closeDashboardModal();
     if (event.key === 'ArrowLeft') activeDashboardNavigate?.(-1);

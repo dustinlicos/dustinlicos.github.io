@@ -379,6 +379,18 @@
   const certModal = document.getElementById('cert-modal');
   const certModalImage = document.getElementById('cert-modal-image');
   const certModalClose = document.querySelector('.cert-modal-close');
+  const certificationsToggle = document.getElementById('certifications-toggle');
+  const certificationContent = document.getElementById('certification-content');
+  const certificationsToggleIcon = certificationsToggle?.querySelector('.certifications-toggle-icon');
+  const certificationsToggleLabel = certificationsToggle?.querySelector('.certifications-toggle-label');
+  certificationsToggle?.addEventListener('click', () => {
+    if (!certificationContent || !certificationsToggleIcon || !certificationsToggleLabel) return;
+    const isExpanded = certificationsToggle.getAttribute('aria-expanded') === 'true';
+    certificationsToggle.setAttribute('aria-expanded', String(!isExpanded));
+    certificationContent.hidden = isExpanded;
+    certificationsToggleIcon.textContent = isExpanded ? '+' : '−';
+    certificationsToggleLabel.textContent = isExpanded ? 'Show certificates' : 'Hide certificates';
+  });
   const closeCertModal = () => {
     if (!certModal) return;
     certModal.hidden = true;

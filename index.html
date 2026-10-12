@@ -32,9 +32,6 @@
                        empty space), open styles.css and adjust the two
                        variables near the top: --photo-pos (recenters the
                        crop) and --photo-zoom (zooms in/out).
-  0b. ADD A BACKGROUND → save a JPG named "background.jpg" in this same
-                         folder. It is automatically displayed behind the
-                         page with a dark, low-opacity treatment.
   1. Find & replace "Jordan Blake" with your name (appears ~4 times).
   2. Edit the text inside !-- EDIT: ... -- comments throughout this file.
   3. TECH STACK  → search for id="tech-stack" and edit the .chip items.
@@ -102,8 +99,6 @@
       <h1>Making Sense of Data for <span>SMARTER BUSINESS MOVES</span></h1>
       <div class="hero-support">
         <p>I transform scattered numbers into focused dashboards and useful insights, giving teams the clarity to act with confidence and move priorities forward.</p>
-        <a class="hero-outline-btn" href="#contact">LET'S CONNECT <span>→</span></a>
-      </div>
       </div>
     </div>
   </div>
@@ -117,14 +112,38 @@
       <p>Practical tools I use to turn messy data into decision-ready reporting.</p>
     </div>
     <div class="tool-cloud" aria-label="Technology tools">
-      <span class="tool-orb tool-powerbi" data-tooltip="Power BI for decision-ready dashboards and executive reporting."><img src="https://api.iconify.design/logos:microsoft-power-bi.svg" alt=""><span class="tool-name">Power BI</span></span>
-      <span class="tool-orb tool-excel" data-tooltip="Excel for fast analysis, modeling, and operational reporting."><img src="https://api.iconify.design/vscode-icons:file-type-excel2.svg" alt=""><span class="tool-name">Excel</span></span>
-      <span class="tool-orb tool-python" data-tooltip="Python for automation, analysis, and repeatable data workflows."><img src="https://api.iconify.design/logos:python.svg" alt=""><span class="tool-name">Python</span></span>
-      <span class="tool-orb tool-postgres" data-tooltip="PostgreSQL for reliable data storage and reporting foundations."><img src="https://api.iconify.design/logos:postgresql.svg" alt=""><span class="tool-name">PostgreSQL</span></span>
-      <span class="tool-orb tool-figma" data-tooltip="Figma for dashboard storytelling and user-friendly design thinking."><img src="https://api.iconify.design/logos:figma.svg" alt=""><span class="tool-name">Figma</span></span>
-      <span class="tool-orb tool-tableau" data-tooltip="Tableau for visual storytelling and stakeholder-friendly insights."><img src="https://api.iconify.design/logos:tableau-icon.svg" alt=""><span class="tool-name">Tableau</span></span>
-      <span class="tool-orb tool-copilot" data-tooltip="Copilot to speed up analysis, documentation, and implementation work."><img src="https://api.iconify.design/logos:github-copilot.svg" alt=""><span class="tool-name">Copilot</span></span>
-      <span class="tool-orb tool-claude" data-tooltip="Claude for faster research, synthesis, and problem-solving support."><img src="https://api.iconify.design/logos:claude-icon.svg" alt=""><span class="tool-name">Claude AI</span></span>
+      <span class="tool-orb tool-powerbi" data-tooltip="Power BI for decision-ready dashboards and executive reporting.">
+        <img class="tool-logo" src="tool-logos/power-bi.svg" alt="" aria-hidden="true">
+        <span class="tool-name">Power BI</span>
+      </span>
+      <span class="tool-orb tool-excel" data-tooltip="Excel for fast analysis, modeling, and operational reporting.">
+        <img class="tool-logo" src="tool-logos/excel.svg" alt="" aria-hidden="true">
+        <span class="tool-name">Excel</span>
+      </span>
+      <span class="tool-orb tool-python" data-tooltip="Python for automation, analysis, and repeatable data workflows.">
+        <img class="tool-logo" src="tool-logos/python.svg" alt="" aria-hidden="true">
+        <span class="tool-name">Python</span>
+      </span>
+      <span class="tool-orb tool-postgres" data-tooltip="PostgreSQL for reliable data storage and reporting foundations.">
+        <img class="tool-logo" src="tool-logos/postgresql.svg" alt="" aria-hidden="true">
+        <span class="tool-name">PostgreSQL</span>
+      </span>
+      <span class="tool-orb tool-figma" data-tooltip="Figma for dashboard storytelling and user-friendly design thinking.">
+        <img class="tool-logo" src="tool-logos/figma.svg" alt="" aria-hidden="true">
+        <span class="tool-name">Figma</span>
+      </span>
+      <span class="tool-orb tool-tableau" data-tooltip="Tableau for visual storytelling and stakeholder-friendly insights.">
+        <img class="tool-logo" src="tool-logos/tableau.svg" alt="" aria-hidden="true">
+        <span class="tool-name">Tableau</span>
+      </span>
+      <span class="tool-orb tool-copilot" data-tooltip="Copilot to speed up analysis, documentation, and implementation work.">
+        <img class="tool-logo" src="tool-logos/copilot.svg" alt="" aria-hidden="true">
+        <span class="tool-name">Copilot</span>
+      </span>
+      <span class="tool-orb tool-claude" data-tooltip="Claude for faster research, synthesis, and problem-solving support.">
+        <img class="tool-logo" src="tool-logos/claude.svg" alt="" aria-hidden="true">
+        <span class="tool-name">Claude AI</span>
+      </span>
     </div>
   </div>
 </section>
@@ -134,8 +153,9 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>Dashboards, not decoration</h2>
-      <p>Each project below solves a real reporting problem. Browse the static report screenshots or read through the build.</p>
+      <p>Each project below solves a real reporting problem.</p>
     </div>
+    <p class="section-hint"><span aria-hidden="true">↔</span> Scroll to explore dashboards</p>
 
     <div class="projects-shell">
       <div class="projects">
@@ -285,6 +305,7 @@
       <h2>Results that make a difference</h2>
       <p>Selected outcomes from improving reporting, automation, and business intelligence workflows.</p>
     </div>
+    <p class="section-hint"><span aria-hidden="true">↗</span> Hover or focus an achievement to reveal more</p>
     <div class="achievement-grid">
       <div class="achievement-highlights">
         <article class="achievement-feature" tabindex="0">
@@ -333,6 +354,7 @@
       <h2>Learning that keeps the work sharp</h2>
       <p>Continuous learning that strengthens reporting, analysis, and business decision-making.</p>
     </div>
+    <p class="section-hint"><span aria-hidden="true">↗</span> Select any certificate to view it full size</p>
     <div class="certification-list" role="list">
       <a class="certification-item" href="certification images/certification-02.jpg" target="_blank" rel="noopener" role="listitem" aria-label="Open Prompt Engineering for Work certificate">
         <div class="certification-thumb">

@@ -34,7 +34,7 @@
                        crop) and --photo-zoom (zooms in/out).
   1. Find & replace "Jordan Blake" with your name (appears ~4 times).
   2. Edit the text inside !-- EDIT: ... -- comments throughout this file.
-  3. TECH STACK  → search for id="tech-stack" and edit the .tool-item entries.
+  3. TECH STACK  → search for id="tech-stack" and edit the .tool-group entries.
   4. PROJECTS    → search for id="portfolio" and duplicate a .project-card
                    block for each dashboard you want to show.
   5. ADD POWER BI SCREENSHOTS:
@@ -104,18 +104,62 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>Tools that move the work</h2>
-      <p>Practical tools I use to turn messy data into decision-ready reporting.</p>
+      <p>From dashboards and data workflows to project delivery, these are the tools and skills I bring to the work.</p>
     </div>
-    <ul class="tool-list" aria-label="Technology tools">
-      <li class="tool-item" tabindex="0"><img class="tool-logo" src="tool-logos/power-bi.svg" alt="" aria-hidden="true"><span class="tool-name">Power BI</span><span class="tool-description">for decision-ready dashboards and executive reporting.</span></li>
-      <li class="tool-item" tabindex="0"><img class="tool-logo" src="tool-logos/excel.svg" alt="" aria-hidden="true"><span class="tool-name">Excel</span><span class="tool-description">for fast analysis, modeling, and operational reporting.</span></li>
-      <li class="tool-item" tabindex="0"><img class="tool-logo" src="tool-logos/python.svg" alt="" aria-hidden="true"><span class="tool-name">Python</span><span class="tool-description">for automation, analysis, and repeatable data workflows.</span></li>
-      <li class="tool-item" tabindex="0"><img class="tool-logo" src="tool-logos/postgresql.svg" alt="" aria-hidden="true"><span class="tool-name">PostgreSQL</span><span class="tool-description">for reliable data storage and reporting foundations.</span></li>
-      <li class="tool-item" tabindex="0"><img class="tool-logo" src="tool-logos/figma.svg" alt="" aria-hidden="true"><span class="tool-name">Figma</span><span class="tool-description">for dashboard storytelling and user-friendly design thinking.</span></li>
-      <li class="tool-item" tabindex="0"><img class="tool-logo" src="tool-logos/tableau.svg" alt="" aria-hidden="true"><span class="tool-name">Tableau</span><span class="tool-description">for visual storytelling and stakeholder-friendly insights.</span></li>
-      <li class="tool-item" tabindex="0"><img class="tool-logo" src="tool-logos/copilot.svg" alt="" aria-hidden="true"><span class="tool-name">Copilot</span><span class="tool-description">to speed up analysis, documentation, and implementation work.</span></li>
-      <li class="tool-item" tabindex="0"><img class="tool-logo" src="tool-logos/claude.svg" alt="" aria-hidden="true"><span class="tool-name">Claude AI</span><span class="tool-description">for faster research, synthesis, and problem-solving support.</span></li>
-    </ul>
+    <div class="tool-groups" aria-label="Tools and core skills">
+      <div class="tool-group">
+        <h3>Business Intelligence</h3>
+        <ul class="tool-skills">
+          <li><img class="tool-logo" src="tool-logos/power-bi.svg" alt="" aria-hidden="true">Power BI</li>
+          <li><img class="tool-logo" src="tool-logos/tableau.svg" alt="" aria-hidden="true">Tableau</li>
+          <li>DAX</li><li>Data Modeling</li><li>Star Schema</li><li>Data Visualization</li><li>Data Storytelling</li>
+        </ul>
+      </div>
+      <div class="tool-group">
+        <h3>Data &amp; ETL</h3>
+        <ul class="tool-skills">
+          <li><img class="tool-logo" src="tool-logos/postgresql.svg" alt="" aria-hidden="true">PostgreSQL</li>
+          <li><img class="tool-logo" src="tool-logos/python.svg" alt="" aria-hidden="true">Python</li>
+          <li>Power Query</li><li>Power Automate</li><li>API Integration</li><li>Data Cleaning &amp; Transformation</li>
+        </ul>
+      </div>
+      <div class="tool-group">
+        <h3>Analytics &amp; Reporting</h3>
+        <ul class="tool-skills">
+          <li>Data Analysis</li><li>Statistics</li><li>Business Reporting</li>
+          <li>Data Governance</li><li>Performance Tracking</li>
+        </ul>
+      </div>
+      <div class="tool-group">
+        <h3>Project &amp; Process Management</h3>
+        <ul class="tool-skills">
+          <li><img class="tool-logo" src="tool-logos/jira.svg" alt="" aria-hidden="true">Jira</li>
+          <li><img class="tool-logo" src="tool-logos/microsoft-project.svg" alt="" aria-hidden="true">Microsoft Project</li>
+          <li><img class="tool-logo tool-logo-wide" src="tool-logos/float.svg" alt="" aria-hidden="true">Float</li>
+          <li><img class="tool-logo tool-logo-wide" src="tool-logos/deltek.svg" alt="" aria-hidden="true">Polaris</li>
+          <li>PMO</li><li>End-to-End Project Lifecycle</li><li>Lean Six Sigma</li><li>Stakeholder Management</li>
+        </ul>
+      </div>
+      <div class="tool-group">
+        <h3>Productivity Tools</h3>
+        <ul class="tool-skills">
+          <li><img class="tool-logo" src="tool-logos/excel.svg" alt="" aria-hidden="true">Excel</li>
+          <li><img class="tool-logo" src="tool-logos/microsoft-powerpoint.svg" alt="" aria-hidden="true">PowerPoint</li>
+          <li><img class="tool-logo" src="tool-logos/microsoft-word.svg" alt="" aria-hidden="true">Word</li>
+        </ul>
+      </div>
+      <div class="tool-group">
+        <h3>Design &amp; AI</h3>
+        <ul class="tool-skills">
+          <li><img class="tool-logo" src="tool-logos/figma.svg" alt="" aria-hidden="true">Figma</li>
+          <li><img class="tool-logo" src="tool-logos/adobe-photoshop.svg" alt="" aria-hidden="true">Adobe Photoshop</li>
+          <li><img class="tool-logo" src="tool-logos/canva.svg" alt="" aria-hidden="true">Canva</li>
+          <li><img class="tool-logo" src="tool-logos/copilot.svg" alt="" aria-hidden="true">Copilot</li>
+          <li><img class="tool-logo" src="tool-logos/claude.svg" alt="" aria-hidden="true">Claude AI</li>
+          <li>Generative AI</li><li>Prompt Engineering</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -273,9 +317,10 @@
 <section id="employment-history">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Employment history</h2>
-      <p>Career progression across project governance, reporting, and business intelligence.</p>
+      <h2>The work behind the results</h2>
+      <p>A quick look at the roles, projects, and wins along the way.</p>
     </div>
+    <p class="section-hint"><span aria-hidden="true">↗</span> Select any role to explore the details</p>
     <div class="employment-company-group">
       <h3 class="employment-company">EMIDS Technologies <span>(formerly CDR)</span></h3>
       <div class="employment-timeline">
@@ -291,17 +336,27 @@
               <time datetime="2026-09">Sep 2026</time>
             </p>
           </summary>
-          <ul class="employment-highlights">
-            <li>Led the migration of Polaris reporting to the ARC platform with zero disruption to data continuity, helping retire Polaris and deliver approximately USD 50,000 in savings.</li>
-            <li>Owned and maintained Power BI dashboards for Executive Summary, Financial, AI, Delivery Excellence, and Resource Profitability, plus weekly RAG, quality, and financial reports for senior leadership.</li>
-            <li>Built live Power BI dashboards combining data from multiple sources, supported by clean, well-structured data models for reliable reporting and analysis.</li>
-            <li>Used Power Query and Float API integrations to build custom PMO reports beyond standard extracts, improving data quality, structure, and reliability.</li>
-            <li>Identified and implemented reporting automation and process improvements that strengthened PMO governance and efficiency.</li>
-            <li>Coached internal and external teams in Power BI dashboard development, data analysis, and reporting best practices.</li>
-            <li>Trained six teams to build Power BI capability and support self-service reporting.</li>
-            <li>Improved month-end close speed by 60% and saved 12 hours of manual reporting work each week through dashboard and automation improvements.</li>
-            <li>Maintained 98% on-time data refresh reliability across reporting.</li>
-          </ul>
+          <div class="employment-content">
+            <div class="employment-detail-group">
+              <h5>Key achievements</h5>
+              <ul class="employment-highlights">
+                <li>Led the migration of Polaris reporting to the ARC platform with zero disruption to data continuity, helping retire Polaris and deliver approximately USD 50,000 in savings.</li>
+                <li>Improved month-end close speed by 60% and saved 12 hours of manual reporting work each week through dashboard and automation improvements.</li>
+                <li>Maintained 98% on-time data refresh reliability across reporting.</li>
+                <li>Trained six teams to build Power BI capability and support self-service reporting.</li>
+              </ul>
+            </div>
+            <div class="employment-detail-group">
+              <h5>Roles &amp; responsibilities</h5>
+              <ul class="employment-highlights">
+                <li>Owned and maintained Power BI dashboards for Executive Summary, Financial, AI, Delivery Excellence, and Resource Profitability, plus weekly RAG, quality, and financial reports for senior leadership.</li>
+                <li>Built live Power BI dashboards combining data from multiple sources, supported by clean, well-structured data models for reliable reporting and analysis.</li>
+                <li>Used Power Query and Float API integrations to build custom PMO reports beyond standard extracts, improving data quality, structure, and reliability.</li>
+                <li>Identified and implemented reporting automation and process improvements that strengthened PMO governance and efficiency.</li>
+                <li>Coached internal and external teams in Power BI dashboard development, data analysis, and reporting best practices.</li>
+              </ul>
+            </div>
+          </div>
         </details>
         <details class="employment-entry">
           <summary class="employment-heading">
@@ -315,13 +370,23 @@
               <time datetime="2024-07">Jul 2024</time>
             </p>
           </summary>
-          <ul class="employment-highlights">
-            <li>Developed Power BI reporting solutions that replaced costly custom report development, saving approximately USD 23,400.</li>
-            <li>Maintained and automated reports covering utilization, bench, headcount, leave audits, and resource planning.</li>
-            <li>Maintained the PMO reporting cadence from weekly through annual cycles to support ongoing planning and performance tracking.</li>
-            <li>Reconciled Float and Polaris data to improve reporting accuracy and consistency.</li>
-            <li>Co-facilitated user acceptance testing for Polaris deployments.</li>
-          </ul>
+          <div class="employment-content">
+            <div class="employment-detail-group">
+              <h5>Key achievements</h5>
+              <ul class="employment-highlights">
+                <li>Developed Power BI reporting solutions that replaced costly custom report development, saving approximately USD 23,400.</li>
+                <li>Co-facilitated user acceptance testing for Polaris deployments.</li>
+              </ul>
+            </div>
+            <div class="employment-detail-group">
+              <h5>Roles &amp; responsibilities</h5>
+              <ul class="employment-highlights">
+                <li>Maintained and automated reports covering utilization, bench, headcount, leave audits, and resource planning.</li>
+                <li>Maintained the PMO reporting cadence from weekly through annual cycles to support ongoing planning and performance tracking.</li>
+                <li>Reconciled Float and Polaris data to improve reporting accuracy and consistency.</li>
+              </ul>
+            </div>
+          </div>
         </details>
         <details class="employment-entry">
           <summary class="employment-heading">
@@ -335,12 +400,22 @@
               <time datetime="2023-02">Feb 2023</time>
             </p>
           </summary>
-          <ul class="employment-highlights">
-            <li>Administered Float resource planning to support PMO resource and project operations.</li>
-            <li>Supported recurring PMO reporting cycles by organizing operational inputs for utilization, bench, headcount, leave audits, and resource planning reports.</li>
-            <li>Delivered onboarding and training on Float and Polaris to support team adoption and accurate day-to-day use.</li>
-            <li>Supported PMO continuous-improvement initiatives to strengthen project governance and delivery practices.</li>
-          </ul>
+          <div class="employment-content">
+            <div class="employment-detail-group">
+              <h5>Key achievements</h5>
+              <ul class="employment-highlights">
+                <li>Delivered Float and Polaris onboarding and training to support team adoption and accurate day-to-day use.</li>
+              </ul>
+            </div>
+            <div class="employment-detail-group">
+              <h5>Roles &amp; responsibilities</h5>
+              <ul class="employment-highlights">
+                <li>Administered Float resource planning to support PMO resource and project operations.</li>
+                <li>Supported recurring PMO reporting cycles by organizing operational inputs for utilization, bench, headcount, leave audits, and resource planning reports.</li>
+                <li>Contributed to PMO continuous-improvement work that strengthened project governance and delivery practices.</li>
+              </ul>
+            </div>
+          </div>
         </details>
       </div>
     </div>

@@ -15,14 +15,12 @@
 
   const themeToggle = document.getElementById('theme-toggle');
   const themeToggleLabel = themeToggle?.querySelector('.theme-toggle-label');
-  const themeToggleIcon = themeToggle?.querySelector('.theme-toggle-icon');
   const updateThemeToggle = () => {
     const isLight = document.documentElement.dataset.theme === 'light';
     const nextTheme = isLight ? 'dark' : 'light';
     themeToggle?.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
     themeToggle?.setAttribute('title', `Switch to ${nextTheme} theme`);
     if (themeToggleLabel) themeToggleLabel.textContent = nextTheme === 'light' ? 'Light' : 'Dark';
-    if (themeToggleIcon) themeToggleIcon.textContent = nextTheme === 'light' ? '☼' : '☾';
   };
   updateThemeToggle();
   themeToggle?.addEventListener('click', () => {

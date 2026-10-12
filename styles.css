@@ -430,7 +430,7 @@
     display:flex; flex-wrap:wrap; gap:8px; margin:0; padding:0; list-style:none;
   }
   .tool-skills li{
-    display:inline-flex; align-items:center; gap:7px; min-height:34px; padding:5px 9px;
+    display:inline-flex; align-items:center; gap:7px; height:38px; padding:5px 9px;
     border:1px solid var(--line-soft); border-radius:4px;
     color:var(--text); font-size:.82rem; line-height:1.3;
   }
@@ -441,6 +441,18 @@
   .tool-logo-wide{
     width:54px; height:22px; padding:0;
     border-radius:0; background:transparent;
+  }
+  .tool-logo-mark{
+    width:26px; height:22px; padding:0;
+    border-radius:0; background:transparent;
+  }
+  .tool-logo-float{
+    height:26px; padding:3px;
+    border-radius:3px; background:#fff;
+  }
+  .tool-logo-deltek{
+    width:70px; height:26px; padding:4px 5px;
+    border-radius:4px; background:#fff;
   }
   @media (max-width:760px){
     .tool-groups{ grid-template-columns:1fr; }

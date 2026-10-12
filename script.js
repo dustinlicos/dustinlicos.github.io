@@ -25,9 +25,18 @@
   updateThemeToggle();
   themeToggle?.addEventListener('click', () => {
     const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-    document.documentElement.dataset.theme = nextTheme;
-    localStorage.setItem('portfolio-theme', nextTheme);
-    updateThemeToggle();
+    const applyTheme = () => {
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem('portfolio-theme', nextTheme);
+      updateThemeToggle();
+    };
+
+    if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.startViewTransition(applyTheme);
+      return;
+    }
+
+    applyTheme();
   });
 
   const dashboardModal = document.getElementById('dashboard-modal');
@@ -340,7 +349,7 @@
   });
 
   const revealTargets = document.querySelectorAll(
-    '.sec-head, .project-card, .chip, .impact-row, .contact-panel'
+    '.sec-head, .project-card, .impact-row, .contact-panel'
   );
   revealTargets.forEach((el, i) => {
     el.classList.add('reveal');
@@ -379,10 +388,9 @@
   document.querySelectorAll('.certification-item').forEach((item) => {
     item.addEventListener('click', (event) => {
       event.preventDefault();
-      const previewImage = item.querySelector('img');
-      if (!previewImage || !certModal || !certModalImage) return;
-      certModalImage.src = previewImage.src;
-      certModalImage.alt = previewImage.alt;
+      if (!certModal || !certModalImage) return;
+      certModalImage.src = item.href;
+      certModalImage.alt = item.getAttribute('aria-label').replace(/^Open | certificate$/g, '');
       certModal.hidden = false;
       document.body.classList.add('modal-open');
     });

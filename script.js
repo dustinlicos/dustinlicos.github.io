@@ -13,6 +13,25 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggleLabel = themeToggle?.querySelector('.theme-toggle-label');
+  const themeToggleIcon = themeToggle?.querySelector('.theme-toggle-icon');
+  const updateThemeToggle = () => {
+    const isLight = document.documentElement.dataset.theme === 'light';
+    const nextTheme = isLight ? 'dark' : 'light';
+    themeToggle?.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
+    themeToggle?.setAttribute('title', `Switch to ${nextTheme} theme`);
+    if (themeToggleLabel) themeToggleLabel.textContent = nextTheme === 'light' ? 'Light' : 'Dark';
+    if (themeToggleIcon) themeToggleIcon.textContent = nextTheme === 'light' ? '☼' : '☾';
+  };
+  updateThemeToggle();
+  themeToggle?.addEventListener('click', () => {
+    const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem('portfolio-theme', nextTheme);
+    updateThemeToggle();
+  });
+
   const dashboardModal = document.getElementById('dashboard-modal');
   const dashboardModalImage = document.getElementById('dashboard-modal-image');
   const dashboardModalImagePlaceholder = document.querySelector('.dashboard-modal-image-placeholder');
@@ -320,38 +339,6 @@
       });
     }, { passive: true });
 
-    const menuToggle = document.querySelector('.nav-menu-toggle');
-    const siteMenu = document.getElementById('site-menu');
-    if (menuToggle && siteMenu) {
-      let menuScrollPosition = 0;
-      const closeMenu = (restoreScrollPosition) => {
-        menuToggle.setAttribute('aria-expanded', 'false');
-        siteMenu.classList.remove('is-open');
-        document.body.classList.remove('menu-open');
-        if (restoreScrollPosition) window.scrollTo({ top: menuScrollPosition, behavior: 'smooth' });
-      };
-      menuToggle.addEventListener('click', () => {
-        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-        if (!isOpen) menuScrollPosition = window.scrollY;
-        menuToggle.setAttribute('aria-expanded', String(!isOpen));
-        siteMenu.classList.toggle('is-open', !isOpen);
-        document.body.classList.toggle('menu-open', !isOpen);
-      });
-      siteMenu.addEventListener('click', (event) => {
-        if (event.target === siteMenu) closeMenu(true);
-      });
-      document.addEventListener('click', (event) => {
-        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-        if (isOpen && !siteMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-          closeMenu(true);
-        }
-      });
-      siteMenu.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          closeMenu(false);
-        });
-      });
-    }
   });
 
   const revealTargets = document.querySelectorAll(

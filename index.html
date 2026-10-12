@@ -67,6 +67,11 @@
 -->
 
 <link rel="stylesheet" href="styles.css">
+<script>
+  if (localStorage.getItem('portfolio-theme') === 'light') {
+    document.documentElement.dataset.theme = 'light';
+  }
+</script>
 </head>
 <body>
 
@@ -76,12 +81,7 @@
       <span class="nav-brand-block">DUSTIN</span>
       <span>LICOS</span>
     </a>
-    <button class="nav-menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-menu">
-      <span class="nav-menu-label">MENU</span>
-      <span class="nav-menu-close" aria-hidden="true">×</span>
-      <i aria-hidden="true"><b></b><b></b><b></b></i>
-    </button>
-    <nav class="nav-links" id="site-menu">
+    <nav class="nav-links" aria-label="Main navigation">
       <a href="#tech-stack">Tech Stack</a>
       <a href="#portfolio">Power BI Portfolio</a>
       <a href="#about">About</a>
@@ -89,6 +89,10 @@
       <a href="#certifications">Certifications</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme">
+      <span class="theme-toggle-icon" aria-hidden="true">☼</span>
+      <span class="theme-toggle-label">Light</span>
+    </button>
   </div>
 </header>
 

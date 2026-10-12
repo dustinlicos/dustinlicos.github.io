@@ -349,7 +349,7 @@
   });
 
   const revealTargets = document.querySelectorAll(
-    '.sec-head, .project-card, .impact-row, .contact-panel'
+    '.sec-head, .project-card, .contact-panel'
   );
   revealTargets.forEach((el, i) => {
     el.classList.add('reveal');

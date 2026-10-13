@@ -602,11 +602,14 @@
   .about-copy .about-role{ color:var(--text); margin-top:22px; font-size:var(--type-sm); }
   .about-resume{ margin-top:28px; font-family:var(--mono); font-size:var(--type-xs); letter-spacing:.12em; }
   .resume-icon{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-  .about-photo{ display:flex; justify-content:center; }
+  .about-photo{ display:flex; flex-direction:column; align-items:center; gap:var(--space-3); }
   .about-photo .hero-photo{
     width:min(360px, 100%); aspect-ratio:1; border:4px solid var(--text);
     border-radius:50%; overflow:hidden; background:var(--panel-2);
   }
+  .about-photo-caption{ text-align:center; }
+  .about-photo-caption .hero-name-text{ color:var(--text); font-size:var(--type-xl); }
+  .about-photo-caption p{ color:var(--text-dim); font-size:var(--type-sm); }
   .about-photo .hero-photo-frame,
   .about-photo .hero-photo-frame img,
   .about-photo .hero-photo-frame .photo-fallback-initials{ border-radius:50%; }
